@@ -1,9 +1,9 @@
 puts "Введите основание треугольника"
-basis = gets.chomp.to_f
+basis = gets.to_f
 
 puts "Введите высоту треугольника"
-height = gets.chomp.to_f
+height = gets.to_f
 
-area = basis / 2 * height
+area = 0.5 * basis * height
 
 puts area.round(2)
