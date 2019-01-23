@@ -1,32 +1,25 @@
-result = {}
-goods = []
-prices = []
-quantities = []
+cart = {}
+sum = 0
 
 loop do
   puts "Введите название товара (чтобы закончить ввод, введите 'stop')"
-  goods << gets.chomp
-
-  break if goods.include? "stop"
+  product_name = gets.chomp
+  break if product_name.downcase == 'стоп'
 
   puts "Введите цену товара за единицу"
-  prices << gets.to_f
+  price = gets.to_f
 
   puts "Введите кол-во купленного товара"
-  quantities << gets.to_f
+  quantity = gets.to_f
+
+  cart[product_name] = { price: price, quantity: quantity }
+  sum += price * quantity
 end
 
-goods.pop
+puts "Вы купили:"
 
-goods.each do |good|
-  prices.each do |price|
-    quantities.each do |quantity|
-      result[good] = { price => quantity }
-    end
-  end
+cart.each do |key, value|
+  puts "#{key} за #{value[:price]} в кол-ве #{value[:quantity]}"
 end
 
-result.each do |key, value|
-  puts "#{key}, #{value}"
-end
-
+puts "Итоговая сумма за все товары: #{sum}"
