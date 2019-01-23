@@ -2,10 +2,8 @@ letters = {}
 alphabet = ("a".."z")
 vowels = ["a", "e", "i", "o", "u", "y"]
 
-alphabet.each_with_index do |letter, index|
-  vowels.each do |vowel|
-    letters[letter] = index + 1 if letter == vowel
-  end
+alphabet.each.with_index(1) do |letter, index|
+  letters[letter] = index if vowels.include?(letter)
 end
 
-#puts letters
+puts letters
