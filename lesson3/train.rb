@@ -1,15 +1,15 @@
 class Train
-  attr_accessor :registration_number, :type
-  attr_reader :number_of_wagons, :speed
+  attr_accessor :wagons_count, :speed, :current_station
+  attr_reader :number, :type
 
-  def initialize(registration_number, type, number_of_wagons)
+  def initialize(registration_number, type, wagons_count)
     @registration_number = registration_number
     @type = type
-    @number_of_wagons = number_of_wagons
+    @wagons_count = wagons_count
     @speed = 0
   end
 
-  def raise_speed
+  def raise_speed(change_speed)
     self.speed += 1
   end
 
@@ -17,32 +17,44 @@ class Train
     self.speed = 0
   end
 
-  def hitching_wagon # прицеплять вагон
-    self.number_of_wagons += 1 if speed == 0
+  def hitching_wagon
+    self.wagons_count += 1 if speed == 0
   end
 
-  def unhooking_wagon # отцеплять вагон
-    self.number_of_wagons -= 1 if speed == 0 && number_of_wagons > 1
+  def unhooking_wagon
+    self.wagons_count -= 1 if speed == 0 && wagons_count > 1
   end
 
-  def itinerary(route) # маршрут следования
-    route.stations[0].add_train(self) # station.add_train(self)
+  def set_route(route)
+    route.stations[0].add_train(self)
+    @current_station = 0
   end
 
-  def moving_to_station(route, station, direction = "forward")
-    if direction == "forward"
-      route.stations[station] += 1
-    else
-      route.stations[station] -= 1
+  def move_forward(route, current_station)
+    stations = route.stations
+    if stations.size > self.current_station + 1
+      stations[self.current_station].send_train(self)
+      stations[self.current_station + 1].add_train(self)
+      self.current_station += 1
     end
   end
 
-  def show_stations(route, station)
-    #if station.trains.include?(self)
-      three_stations = [
-        route.stations[station] -= 1,
-        route.stations[station],
-        route.stations[station] += 1
-      ]
+  def move_backwards(route, current_station)
+    if self.current_station > 0
+      stations = route.stations
+      stations[self.current_station].send_train(self)
+      stations[self.current_station - 1].add_train(self)
+      self.current_station -= 1
+    end
+  end
+
+  def get_previous_station
+    stations = route.stations
+    stations[self.current_station - 1] if self.current_station > 0
+  end
+
+  def get_next_station
+    stations = route.stations
+    stations[self.current_station + 1] if stations.size > self.current_station + 1
   end
 end
