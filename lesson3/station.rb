@@ -10,10 +10,6 @@ class Station
     trains << train
   end
 
-  def show_trains
-    trains.each { |train| puts train}
-  end
-
   def trains_by_type(type)
     trains.select { |train| train.type == type }
   end

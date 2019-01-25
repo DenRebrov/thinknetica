@@ -1,6 +1,6 @@
 class Train
   attr_reader :wagons_count, :speed, :current_station,
-  :number, :type, :route
+    :number, :type, :route
 
   def initialize(number, type, wagons_count)
     @number = number
@@ -10,19 +10,19 @@ class Train
   end
 
   def raise_speed(change_speed)
-    self.speed += change_speed
+    @speed += change_speed
   end
 
-  def to_brake
-    self.speed = 0
+  def stop
+    @speed = 0
   end
 
   def hook_wagon
-    self.wagons_count += 1 if speed == 0
+    @wagons_count += 1 if speed == 0
   end
 
   def unhook_wagon
-    self.wagons_count -= 1 if speed == 0 && wagons_count > 1
+    @wagons_count -= 1 if speed == 0 && @wagons_count > 0
   end
 
   def set_route(route)
