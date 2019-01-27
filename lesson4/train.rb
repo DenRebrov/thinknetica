@@ -22,7 +22,7 @@ class Train
   end
 
   def unhook_wagon(wagon)
-    @wagons.delete(wagon) if attachable_wagon?(wagon) && !@wagons.empty?
+    @wagons.delete(wagon) if attachable_wagon?(wagon)
   end
 
   def set_route(route)
