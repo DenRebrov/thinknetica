@@ -18,11 +18,11 @@ class Train
   end
 
   def hook_wagon(wagon)
-    @wagons << wagon if same_type?(wagon)
+    @wagons << wagon if attachable_wagon?(wagon)
   end
 
   def unhook_wagon(wagon)
-    @wagons.delete(wagon) if same_type?(wagon) && !@wagons.empty?
+    @wagons.delete(wagon) if attachable_wagon?(wagon) && !@wagons.empty?
   end
 
   def set_route(route)
@@ -57,14 +57,6 @@ class Train
 
   def current_station
     @route.stations[@current_station]
-  end
-
-  protected
-
-  # Метод инкапсулирован, потому что не используется в интерфейсе класса
-  # protected, потому что у данного класса будут дочерние
-  def same_type?(wagon)
-    self.type == wagon.type
   end
 
   def have_wagons?

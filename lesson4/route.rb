@@ -16,4 +16,8 @@ class Route
   def show_stations(stations)
     @stations.each { |station| puts station.name }
   end
+
+  def to_s
+    [@stations.first.name, @stations.last.name].join(' > ')
+  end
 end
