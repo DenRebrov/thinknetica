@@ -1,3 +1,5 @@
+require_relative 'instance_counter.rb'
+
 class Route
   include InstanceCounter
 
@@ -13,7 +15,9 @@ class Route
   end
 
   def delete_station(station)
-    @stations.delete(station)
+    if station != initial_station || station != end_station
+      @stations.delete(station)
+    end
   end
 
   def show_stations(stations)
