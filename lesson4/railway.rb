@@ -9,7 +9,8 @@ class Railway
   TRAIN_CURRENT_STATION = "Поезд прибыл на станцию "
   TRAIN_END_STATION = "Поезд на конечной станции"
   STATION_EMPTY = "На этой станции нет поездов"
-  NOT_ENOUGH_STATIONS = "Нужно создать хотя бы 2 станции!"
+  EXCEPTION_SAME_STATIONS = "Конечная и начальная станции одинаковы! Выберите другую."
+  NOT_ENOUGH_STATIONS = "Недостаточно станций!"
   NOT_ENOUGH_ROUTES = "Нужно создать путь!"
   NOT_ENOUGH_TRAINS = "Нужно создать поезд!"
   NOT_ENOUGH_WAGONS = "Нужно создать вагон!"
@@ -37,7 +38,7 @@ class Railway
 
   def create_train
     puts SET_TRAIN_NUMBER
-    number = gets.to_i
+    number = gets.chomp
 
     puts SELECT_TYPE
     train_type = select_from_array([CargoTrain, PassengerTrain])
@@ -55,6 +56,11 @@ class Railway
     show_array(@stations, :name)
     end_station = select_from_array(@stations)
 
+    until ini_station != end_station
+      puts EXCEPTION_SAME_STATIONS
+      end_station = select_from_array(@stations)
+    end
+
     @routes << Route.new(ini_station, end_station)
   end
 
@@ -71,6 +77,39 @@ class Railway
     route = select_from_array(@routes)
 
     train.set_route(route)
+  end
+
+  def add_station
+    return puts(NOT_ENOUGH_STATIONS) if @stations.empty?
+    return puts(NOT_ENOUGH_ROUTES) if @routes.empty?
+
+    puts SELECT_STATION
+    show_array(@stations, :name)
+    station = select_from_array(@stations)
+
+    puts SELECT_ROUTE
+    show_array(@routes, :to_s)
+    route = select_from_array(@routes)
+
+    route.add_station(station)
+    @stations.delete(station)
+  end
+
+  def remove_station
+    return puts(NOT_ENOUGH_STATIONS) if @stations.empty?
+    return puts(NOT_ENOUGH_ROUTES) if @routes.empty?
+    return puts(NOT_ENOUGH_STATIONS) if @stations.size < 3
+
+    puts SELECT_ROUTE
+    show_array(@routes, :to_s)
+    route = select_from_array(@routes)
+
+    puts SELECT_STATION
+    show_array(route.stations, :name)
+    station = select_from_array(route.stations)
+
+    route.delete_station(station)
+    @stations.push(station)
   end
 
   def create_wagon
@@ -100,19 +139,20 @@ class Railway
   end
 
   def unhook_wagon
+    train_with_wagons = @trains.select(&:have_wagons?)
+
     return puts(NOT_ENOUGH_TRAINS) if @trains.empty?
-    return puts(NOT_ENOUGH_WAGONS_TO_TRAIN) if @trains.select { |train| train.have_wagons? } == nil
+    return puts(NOT_ENOUGH_WAGONS_TO_TRAIN) if train_with_wagons.size == 0
 
-    train_with_wagons = @trains.select { |train| train.have_wagons? }
+    puts SELECT_TRAIN
     show_array(train_with_wagons, :to_s)
-    wagon = select_from_array(train_with_wagons)
+    train = select_from_array(train_with_wagons)
 
-    @trains.each do |train|
-      @wagon_type = train.wagon.class
-      train.wagons.delete(wagon) if train.wagons.size > 0
-    end
-
-    @wagons.push(@wagon_type.new)
+    puts SELECT_WAGON
+    show_array(train.wagons, :to_s)
+    wagon = select_from_array(train.wagons)
+    unhooked_wagon = train.unhook_wagon(wagon)
+    @wagons << unhooked_wagon unless unhooked_wagon.nil?
   end
 
   def train_forward

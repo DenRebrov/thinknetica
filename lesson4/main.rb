@@ -15,6 +15,8 @@ class Main
     "Создать поезд",
     "Создать маршрут",
     "Назначаить маршрут поезду",
+    "Добавить станцию в маршрут",
+    "Удалить станцию из маршрута",
     "Создать вагон",
     "Прицепить вагон к поезду",
     "Отцепить вагон от поезда",
@@ -31,7 +33,7 @@ class Main
       end
 
       puts
-      puts "Для управления, введи цифру действия от 1 до 11"
+      puts "Для управления, введи цифру действия от 1 до 13"
       puts "(0 - Выход)"
 
       user_choice = gets.to_i
@@ -41,13 +43,15 @@ class Main
       when 2 then railway.create_train
       when 3 then railway.create_route
       when 4 then railway.assign_route
-      when 5 then railway.create_wagon
-      when 6 then railway.hook_wagon
-      when 7 then railway.unhook_wagon
-      when 8 then railway.train_forward
-      when 9 then railway.train_backwards
-      when 10 then railway.stations_list
-      when 11 then railway.trains_list
+      when 5 then railway.add_station
+      when 6 then railway.remove_station
+      when 7 then railway.create_wagon
+      when 8 then railway.hook_wagon
+      when 9 then railway.unhook_wagon
+      when 10 then railway.train_forward
+      when 11 then railway.train_backwards
+      when 12 then railway.stations_list
+      when 13 then railway.trains_list
       end
 
       break if user_choice == 0

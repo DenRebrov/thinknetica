@@ -18,6 +18,9 @@ class Route
   end
 
   def to_s
-    [@stations.first.name, @stations.last.name].join(' > ')
+    new_stations = @stations.map { |station| station.name }
+    new_stations.delete_at(0)
+    new_stations.delete_at(-1)
+    [@stations.first.name, new_stations, @stations.last.name].join(' > ')
   end
 end
