@@ -42,7 +42,7 @@ class Railway
 
     puts SELECT_TYPE
     train_type = select_from_array([CargoTrain, PassengerTrain])
-    @trains << train_type.new(number, train_type)
+    @trains << train_type.new(number)
   end
 
   def create_route
@@ -98,7 +98,6 @@ class Railway
   def remove_station
     return puts(NOT_ENOUGH_STATIONS) if @stations.empty?
     return puts(NOT_ENOUGH_ROUTES) if @routes.empty?
-    return puts(NOT_ENOUGH_STATIONS) if @stations.size < 3
 
     puts SELECT_ROUTE
     show_array(@routes, :to_s)

@@ -5,8 +5,7 @@ class Train
   include ManufacturingCompany
   include InstanceCounter
 
-  attr_reader :speed, :current_station, :number,
-    :type, :route, :wagons
+  attr_reader :speed, :current_station, :number, :route, :wagons
 
   @@trains = {}
 
@@ -14,10 +13,9 @@ class Train
     @@trains[number]
   end
 
-  def initialize(number, type)
+  def initialize(number)
     @number = number
     @speed = 0
-    @type = type
     @wagons = []
     @@trains[number] = self
     register_instance
