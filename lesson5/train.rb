@@ -11,7 +11,7 @@ class Train
   @@trains = {}
 
   def self.find(number)
-    @@trains.select { |num, train| num == number }.first
+    @@trains[number]
   end
 
   def initialize(number, type)

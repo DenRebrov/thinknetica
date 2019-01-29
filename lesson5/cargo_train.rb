@@ -1,5 +1,5 @@
 class CargoTrain < Train
-  def initialize(number)
+  def initialize(number, type)
     super(number, 1)
   end
 
