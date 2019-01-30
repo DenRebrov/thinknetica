@@ -4,7 +4,7 @@ require_relative 'instance_counter.rb'
 class Train
   NIL_NUMBER_ERROR = "Номер не может быть пустым"
   INVALID_NUMBER_FORMAT = "Номер имеет неправильный формат. Допустимый формат: три буквы или цифры в любом порядке, необязательный дефис и еще 2 буквы или цифры после дефиса"
-  NUMBER_FORMAT = /^[\d?\w]{3}-{0,1}[\d?\w]{2}$/i
+  NUMBER_FORMAT = /^[a-zа-яё\d]{3}\-?[a-zа-яё\d]{2}$/i
 
   include ManufacturingCompany
   include InstanceCounter
@@ -21,11 +21,7 @@ class Train
     @number = number
     @speed = 0
     @wagons = []
-    begin
-      validate!
-    rescue RuntimeError => e
-      puts e.message
-    end
+    validate!
     @@trains[number] = self
     register_instance
   end

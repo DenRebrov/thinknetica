@@ -17,11 +17,7 @@ class Station
   def initialize(name)
     @name = name
     @trains = []
-    begin
-      validate!
-    rescue RuntimeError => e
-      puts e.message
-    end
+    validate!
     @@stations << self
     register_instance
   end

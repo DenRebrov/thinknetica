@@ -9,7 +9,6 @@ class Railway
   TRAIN_CURRENT_STATION = "Поезд прибыл на станцию "
   TRAIN_END_STATION = "Поезд на конечной станции"
   STATION_EMPTY = "На этой станции нет поездов"
-  EXCEPTION_SAME_STATIONS = "Конечная и начальная станции одинаковы! Выберите другую."
   NOT_ENOUGH_STATIONS = "Недостаточно станций!"
   NOT_ENOUGH_ROUTES = "Нужно создать путь!"
   NOT_ENOUGH_TRAINS = "Нужно создать поезд!"
@@ -32,37 +31,42 @@ class Railway
     @wagons = []
   end
 
+begin
   def create_station
     puts SET_STATION_NAME
     name = gets.chomp
+
     station = Station.new(name)
+    @stations << station
+    puts ADD_STATION + "#{station.name}"
+    sleep 1
 
-    if station.validate?
-      @stations << station
-      puts ADD_STATION + "#{station.name}"
-      sleep 1
-    else
-      create_station
-    end
+rescue RuntimeError => e
+    puts e.message
+    retry
   end
+end
 
+begin
   def create_train
     puts SET_TRAIN_NUMBER
     number = gets.chomp
 
     puts SELECT_TYPE
     train_type = select_from_array([CargoTrain, PassengerTrain])
+
     train = train_type.new(number)
+    @trains << train
+    puts ADD_TRAIN + "#{train.to_s}"
+    sleep 1
 
-    if train.validate?
-      @trains << train
-      puts ADD_TRAIN + "#{train.to_s}"
-      sleep 1
-    else
-      create_train
-    end
+rescue RuntimeError => e
+    puts e.message
+    retry
   end
+end
 
+begin
   def create_route
     return puts(NOT_ENOUGH_STATIONS) if @stations.size < 2
 
@@ -74,16 +78,16 @@ class Railway
     show_array(@stations, :name)
     end_station = select_from_array(@stations)
 
-    until ini_station != end_station
-      puts EXCEPTION_SAME_STATIONS
-      end_station = select_from_array(@stations)
-    end
-
     route = Route.new(ini_station, end_station)
     @routes << route
     puts ADD_ROUTE + "#{route.to_s}"
     sleep 1
+
+rescue Exception => e
+    puts e.message
+    retry
   end
+end
 
   def assign_route
     return puts(NOT_ENOUGH_TRAINS) if @trains.empty?
