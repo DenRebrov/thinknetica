@@ -31,7 +31,6 @@ class Railway
     @wagons = []
   end
 
-begin
   def create_station
     puts SET_STATION_NAME
     name = gets.chomp
@@ -41,13 +40,11 @@ begin
     puts ADD_STATION + "#{station.name}"
     sleep 1
 
-rescue RuntimeError => e
+  rescue RuntimeError => e
     puts e.message
     retry
   end
-end
 
-begin
   def create_train
     puts SET_TRAIN_NUMBER
     number = gets.chomp
@@ -60,13 +57,11 @@ begin
     puts ADD_TRAIN + "#{train.to_s}"
     sleep 1
 
-rescue RuntimeError => e
+  rescue RuntimeError => e
     puts e.message
     retry
   end
-end
 
-begin
   def create_route
     return puts(NOT_ENOUGH_STATIONS) if @stations.size < 2
 
@@ -83,11 +78,10 @@ begin
     puts ADD_ROUTE + "#{route.to_s}"
     sleep 1
 
-rescue Exception => e
+  rescue Exception => e
     puts e.message
     retry
   end
-end
 
   def assign_route
     return puts(NOT_ENOUGH_TRAINS) if @trains.empty?
