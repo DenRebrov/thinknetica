@@ -76,7 +76,7 @@ class Train
     @route.stations[@current_station]
   end
 
-  def hitched_wagons
+  def each_wagon
     @wagons.each { |wagon| yield(wagon) }
   end
 

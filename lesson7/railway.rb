@@ -10,7 +10,7 @@ class Railway
   TRAIN_END_STATION = "Поезд на конечной станции"
   STATION_EMPTY = "На этой станции нет поездов"
   NOT_ENOUGH_STATIONS = "Недостаточно станций!"
-  NOT_ENOUGH_ROUTES = "Нужно создать путь!"
+  NOT_ENOUGH_ROUTES = "Нужно создать маршрут!"
   NOT_ENOUGH_TRAINS = "Нужно создать поезд!"
   NOT_ENOUGH_WAGONS = "Нужно создать вагон!"
   NOT_ENOUGH_WAGONS_TO_TRAIN = "У поезда нет прицепленных вагонов!"
@@ -212,7 +212,7 @@ class Railway
         sleep 1
       end
     else
-      if wagon.sit_down
+      if wagon.fill_volume
         puts wagon.to_s
         sleep 1
       else
@@ -257,9 +257,9 @@ class Railway
 
     @stations.each do |station|
       puts "На станции #{station.name}:" if station.have_trains?
-      station.arrived_trains do |train|
+      station.each_train do |train|
         puts train
-        train.hitched_wagons { |wagon| puts wagon }
+        train.each_wagon { |wagon| puts wagon }
         puts
       end
     end
