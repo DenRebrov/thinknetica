@@ -203,22 +203,14 @@ class Railway
     if wagon.is_a?(CargoWagon)
       puts ADD_VOLUME + "#{wagon.available_volume} м3"
       volume = gets.to_f
+    end
 
-      if wagon.fill_volume(volume)
-        puts wagon.to_s
-        sleep 1
-      else
-        puts NOT_ENOUGH_SPACE
-        sleep 1
-      end
+    if wagon.fill_volume(volume)
+      puts wagon.to_s
+      sleep 1
     else
-      if wagon.fill_volume
-        puts wagon.to_s
-        sleep 1
-      else
-        puts NOT_ENOUGH_SPACE
-        sleep 1
-      end
+      puts NOT_ENOUGH_SPACE
+      sleep 1
     end
   end
 

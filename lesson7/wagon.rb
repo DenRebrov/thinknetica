@@ -1,7 +1,7 @@
 class Wagon
   NIL_NAME_ERROR = "Значение не может быть пустым"
 
-  attr_reader :total_volume, :occupied_volume, :available_volume
+  attr_reader :total_volume, :occupied_volume
 
   def initialize(total_volume)
     @total_volume = total_volume
@@ -10,12 +10,13 @@ class Wagon
     validate!
   end
 
-  def fill_volume
-    if @occupied_volume <= @available_volume
-      @occupied_volume += 1
-      @available_volume = @total_volume - @occupied_volume
-    end
-    @occupied_volume
+  def fill_volume(volume)
+    return if available_volume < volume
+    @occupied_volume += volume
+  end
+
+  def available_volume
+    @total_volume - @occupied_volume
   end
 
   def validate?
