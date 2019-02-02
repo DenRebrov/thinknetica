@@ -1,31 +1,31 @@
-require_relative "railway.rb"
-require_relative "station.rb"
-require_relative "route.rb"
-require_relative "train.rb"
-require_relative "cargo_train.rb"
-require_relative "passenger_train.rb"
-require_relative "wagon.rb"
-require_relative "cargo_wagon.rb"
-require_relative "passenger_wagon.rb"
+require_relative 'railway.rb'
+require_relative 'station.rb'
+require_relative 'route.rb'
+require_relative 'train.rb'
+require_relative 'cargo_train.rb'
+require_relative 'passenger_train.rb'
+require_relative 'wagon.rb'
+require_relative 'cargo_wagon.rb'
+require_relative 'passenger_wagon.rb'
 
 class Main
 
   ACTIONS = [
-    "Создать станцию",
-    "Создать поезд",
-    "Создать маршрут",
-    "Назначаить маршрут поезду",
-    "Добавить станцию в маршрут",
-    "Удалить станцию из маршрута",
-    "Создать вагон",
-    "Прицепить вагон к поезду",
-    "Отцепить вагон от поезда",
-    "Занять место/объем в вагоне",
-    "Переместить поезд по маршруту вперед",
-    "Переместить поезд по маршруту назад",
-    "Вывести список станций",
-    "Вывести список поездов на станции"
-  ]
+    'Создать станцию',
+    'Создать поезд',
+    'Создать маршрут',
+    'Назначаить маршрут поезду',
+    'Добавить станцию в маршрут',
+    'Удалить станцию из маршрута',
+    'Создать вагон',
+    'Прицепить вагон к поезду',
+    'Отцепить вагон от поезда',
+    'Занять место/объем в вагоне',
+    'Переместить поезд по маршруту вперед',
+    'Переместить поезд по маршруту назад',
+    'Вывести список станций',
+    'Вывести список поездов на станции'
+  ].freeze
 
   def run(railway)
     loop do
@@ -34,8 +34,8 @@ class Main
       end
 
       puts
-      puts "Для управления, введи цифру действия от 1 до 14"
-      puts "(0 - Выход)"
+      puts 'Для управления, введи цифру действия от 1 до 14'
+      puts '(0 - Выход)'
 
       user_choice = gets.to_i
 

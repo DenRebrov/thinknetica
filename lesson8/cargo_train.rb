@@ -4,6 +4,6 @@ class CargoTrain < Train
   end
 
   def to_s
-    "Поезд № #{self.number}. Грузовой поезд с #{self.wagons.size} вагонами"
+    "Поезд № #{number}. Грузовой поезд с #{wagons.size} вагонами"
   end
 end

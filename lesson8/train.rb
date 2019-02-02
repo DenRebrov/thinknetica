@@ -2,8 +2,8 @@ require_relative 'manufacturing_company.rb'
 require_relative 'instance_counter.rb'
 
 class Train
-  NIL_NUMBER_ERROR = "Номер не может быть пустым"
-  INVALID_NUMBER_FORMAT = "Номер имеет неправильный формат. Допустимый формат: три буквы или цифры в любом порядке, необязательный дефис и еще 2 буквы или цифры после дефиса"
+  NIL_NUMBER_ERROR = 'Номер не может быть пустым'
+  INVALID_NUMBER_FORMAT = 'Номер имеет неправильный формат. Допустимый формат: три буквы или цифры в любом порядке, необязательный дефис и еще 2 буквы или цифры после дефиса'
   NUMBER_FORMAT = /^[a-zа-яё\d]{3}\-?[a-zа-яё\d]{2}$/i
 
   include ManufacturingCompany
@@ -35,11 +35,11 @@ class Train
   end
 
   def hook_wagon(wagon)
-    @wagons << wagon if attachable_wagon?(wagon)
+    wagons << wagon if attachable_wagon?(wagon)
   end
 
   def unhook_wagon(wagon)
-    @wagons.delete(wagon) if attachable_wagon?(wagon)
+    wagons.delete(wagon) if attachable_wagon?(wagon)
   end
 
   def set_route(route)
@@ -77,24 +77,24 @@ class Train
   end
 
   def each_wagon
-    @wagons.each { |wagon| yield(wagon) }
+    wagons.each { |wagon| yield(wagon) }
   end
 
   def have_wagons?
-    self.wagons.size > 0
+    wagons.size > 0
   end
 
   def validate?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   protected
 
   def validate!
-    raise NIL_NUMBER_ERROR if number.nil? || number == ""
+    raise NIL_NUMBER_ERROR if number.nil? || number == ''
     raise INVALID_NUMBER_FORMAT if number !~ NUMBER_FORMAT
   end
 end

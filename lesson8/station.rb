@@ -1,8 +1,8 @@
 require_relative 'instance_counter.rb'
 
 class Station
-  NIL_NAME_ERROR = "Название станции не может быть пустым"
-  NAME_TOO_LENGTH_ERROR = "Слишком длинное название, не больше 30 символов"
+  NIL_NAME_ERROR = 'Название станции не может быть пустым'
+  NAME_TOO_LENGTH_ERROR = 'Слишком длинное название, не больше 30 символов'
 
   include InstanceCounter
 
@@ -39,20 +39,20 @@ class Station
   end
 
   def have_trains?
-    self.trains.size > 0
+    trains.size > 0
   end
 
   def validate?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   protected
 
   def validate!
-    raise NIL_NAME_ERROR if name.nil? || name == ""
+    raise NIL_NAME_ERROR if name.nil? || name == ''
     raise NAME_TOO_LENGTH_ERROR if name.length > 30
   end
 end

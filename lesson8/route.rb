@@ -1,8 +1,8 @@
 require_relative 'instance_counter.rb'
 
 class Route
-  STATION_OBJECT_ERROR = "Начальная или конечная станция не является объектом класса 'Station'"
-  SAME_STATIONS_ERROR = "Начальная и конечная станции одинаковы"
+  STATION_OBJECT_ERROR = 'Начальная или конечная станция не является объектом класса \'Station\''
+  SAME_STATIONS_ERROR = 'Начальная и конечная станции одинаковы'
 
   include InstanceCounter
 
@@ -33,14 +33,14 @@ class Route
   def validate?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   protected
 
   def validate!
-    raise STATION_OBJECT_ERROR unless @stations.first.is_a?(Station) || @stations.last.is_a?(Station)
-    raise SAME_STATIONS_ERROR if @stations.first == stations.last
+    raise STATION_OBJECT_ERROR unless stations.first.is_a?(Station) || stations.last.is_a?(Station)
+    raise SAME_STATIONS_ERROR if stations.first == stations.last
   end
 end

@@ -1,5 +1,5 @@
 class Wagon
-  NIL_NAME_ERROR = "Значение не может быть пустым"
+  NIL_NAME_ERROR = 'Значение не может быть пустым'
 
   attr_reader :total_volume, :occupied_volume
 
@@ -22,13 +22,13 @@ class Wagon
   def validate?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 
   protected
 
   def validate!
-    raise NIL_NAME_ERROR if @total_volume.nil? || @total_volume == ""
+    raise NIL_NAME_ERROR if total_volume.nil? || total_volume == ''
   end
 end

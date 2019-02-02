@@ -1,32 +1,32 @@
 class Railway
-  SELECT_TRAIN = "Выбери порядковый номер поезда из списка"
-  SELECT_WAGON = "Выбери порядковый номер вагона из списка"
-  SELECT_ROUTE = "Выбери порядковый номер маршрута из списка"
-  SELECT_STATION = "Выбери порядковый номер станции из списка"
-  SELECT_TYPE = "Укажи тип (1 - cargo / 2 - passenger)"
-  WAGON_ON = "Вагон прицеплен!"
-  WAGON_OFF = "Вагон НЕ прицеплен. Разные типы поезда и вагона"
-  TRAIN_CURRENT_STATION = "Поезд прибыл на станцию "
-  TRAIN_END_STATION = "Поезд на конечной станции"
-  STATION_EMPTY = "На этой станции нет поездов"
-  NOT_ENOUGH_STATIONS = "Недостаточно станций!"
-  NOT_ENOUGH_ROUTES = "Нужно создать маршрут!"
-  NOT_ENOUGH_TRAINS = "Нужно создать поезд!"
-  NOT_ENOUGH_WAGONS = "Нужно создать вагон!"
-  NOT_ENOUGH_WAGONS_TO_TRAIN = "У поезда нет прицепленных вагонов!"
-  NOT_ENOUGH_SPACE = "Недостаточно места в вагоне!"
-  ADD_STATION = "Создана станция: "
-  ADD_TRAIN = "Создан поезд: "
-  ADD_WAGON = "Создан вагон: "
-  ADD_VOLUME = "Введи объем, который хочешь заполнить от 1 до "
-  ADD_ROUTE = "Создан маршрут: "
-  SET_TRAIN_NUMBER = "Введи номер поезда"
-  SET_SEATS = "Введи кол-во мест в вагоне (от 1 до 60 место)"
-  SET_TOTAL_VOLUME = "Введи общий объем грузового вагона (от 0 до 80 м3)"
-  SET_STATION_NAME = "Введи название станции"
+  SELECT_TRAIN = 'Выбери порядковый номер поезда из списка'
+  SELECT_WAGON = 'Выбери порядковый номер вагона из списка'
+  SELECT_ROUTE = 'Выбери порядковый номер маршрута из списка'
+  SELECT_STATION = 'Выбери порядковый номер станции из списка'
+  SELECT_TYPE = 'Укажи тип (1 - cargo / 2 - passenger)'
+  WAGON_ON = 'Вагон прицеплен!'
+  WAGON_OFF = 'Вагон НЕ прицеплен. Разные типы поезда и вагона'
+  TRAIN_CURRENT_STATION = 'Поезд прибыл на станцию '
+  TRAIN_END_STATION = 'Поезд на конечной станции'
+  STATION_EMPTY = 'На этой станции нет поездов'
+  NOT_ENOUGH_STATIONS = 'Недостаточно станций!'
+  NOT_ENOUGH_ROUTES = 'Нужно создать маршрут!'
+  NOT_ENOUGH_TRAINS = 'Нужно создать поезд!'
+  NOT_ENOUGH_WAGONS = 'Нужно создать вагон!'
+  NOT_ENOUGH_WAGONS_TO_TRAIN = 'У поезда нет прицепленных вагонов!'
+  NOT_ENOUGH_SPACE = 'Недостаточно места в вагоне!'
+  ADD_STATION = 'Создана станция: '
+  ADD_TRAIN = 'Создан поезд: '
+  ADD_WAGON = 'Создан вагон: '
+  ADD_VOLUME = 'Введи объем, который хочешь заполнить от 1 до '
+  ADD_ROUTE = 'Создан маршрут: '
+  SET_TRAIN_NUMBER = 'Введи номер поезда'
+  SET_SEATS = 'Введи кол-во мест в вагоне (от 1 до 60 место)'
+  SET_TOTAL_VOLUME = 'Введи общий объем грузового вагона (от 0 до 80 м3)'
+  SET_STATION_NAME = 'Введи название станции'
   SET_STATION_NUMBER = [
-    "Введи порядковый номер начальной станции из списка",
-    "Введи порядковый номер конечной станции из списка"
+    'Введи порядковый номер начальной станции из списка',
+    'Введи порядковый номер конечной станции из списка'
   ]
 
   def initialize
@@ -180,7 +180,7 @@ class Railway
     train_with_wagons = @trains.select(&:have_wagons?)
 
     return puts(NOT_ENOUGH_TRAINS) if @trains.empty?
-    return puts(NOT_ENOUGH_WAGONS_TO_TRAIN) if train_with_wagons.size == 0
+    return puts(NOT_ENOUGH_WAGONS_TO_TRAIN) if train_with_wagons.size.zero?
 
     puts SELECT_TRAIN
     show_array(train_with_wagons, :to_s)

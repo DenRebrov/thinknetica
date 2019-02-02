@@ -4,6 +4,6 @@ class PassengerTrain < Train
   end
 
   def to_s
-    "Поезд № #{self.number}. Пассажирский поезд с #{self.wagons.size} вагонами"
+    "Поезд № #{number}. Пассажирский поезд с #{wagons.size} вагонами"
   end
 end
