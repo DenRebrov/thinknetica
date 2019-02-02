@@ -80,7 +80,7 @@ class Train
     wagons.each { |wagon| yield(wagon) }
   end
 
-  def have_wagons?
+  def wagons?
     wagons.size > 0
   end
 

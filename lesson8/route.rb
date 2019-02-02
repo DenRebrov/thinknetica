@@ -40,7 +40,9 @@ class Route
   protected
 
   def validate!
-    raise STATION_OBJECT_ERROR unless stations.first.is_a?(Station) || stations.last.is_a?(Station)
+    unless stations.first.is_a?(Station) || stations.last.is_a?(Station)
+      raise STATION_OBJECT_ERROR
+    end
     raise SAME_STATIONS_ERROR if stations.first == stations.last
   end
 end

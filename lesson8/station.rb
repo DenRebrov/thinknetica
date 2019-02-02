@@ -38,7 +38,7 @@ class Station
     @trains.each { |train| yield(train) }
   end
 
-  def have_trains?
+  def trains?
     trains.size > 0
   end
 

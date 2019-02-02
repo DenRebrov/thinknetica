@@ -42,9 +42,8 @@ class Railway
 
     station = Station.new(name)
     @stations << station
-    puts ADD_STATION + "#{station.name}"
+    puts ADD_STATION + station.name
     sleep 1
-
   rescue RuntimeError => e
     puts e.message
     retry
@@ -59,9 +58,8 @@ class Railway
 
     train = train_type.new(number)
     @trains << train
-    puts ADD_TRAIN + "#{train.to_s}"
+    puts ADD_TRAIN + train.to_s
     sleep 1
-
   rescue RuntimeError => e
     puts e.message
     retry
@@ -80,9 +78,8 @@ class Railway
 
     route = Route.new(ini_station, end_station)
     @routes << route
-    puts ADD_ROUTE + "#{route.to_s}"
+    puts ADD_ROUTE + route.to_s
     sleep 1
-
   rescue RuntimeError => e
     puts e.message
     retry
@@ -148,8 +145,7 @@ class Railway
       end
       wagon = wagon_type.new(content)
       @wagons << wagon
-      puts ADD_WAGON + "#{wagon.to_s}"
-
+      puts ADD_WAGON + wagon.to_s
     rescue RuntimeError => e
       puts e.message
       retry
@@ -177,7 +173,7 @@ class Railway
   end
 
   def unhook_wagon
-    train_with_wagons = @trains.select(&:have_wagons?)
+    train_with_wagons = @trains.select(&:wagons?)
 
     return puts(NOT_ENOUGH_TRAINS) if @trains.empty?
     return puts(NOT_ENOUGH_WAGONS_TO_TRAIN) if train_with_wagons.size.zero?
@@ -207,11 +203,10 @@ class Railway
 
     if wagon.fill_volume(volume)
       puts wagon.to_s
-      sleep 1
     else
       puts NOT_ENOUGH_SPACE
-      sleep 1
     end
+    sleep 1
   end
 
   def train_forward
@@ -248,7 +243,7 @@ class Railway
     return puts(NOT_ENOUGH_STATIONS) if @stations.empty?
 
     @stations.each do |station|
-      puts "На станции #{station.name}:" if station.have_trains?
+      puts "На станции #{station.name}:" if station.trains?
       station.each_train do |train|
         puts train
         train.each_wagon { |wagon| puts wagon }
