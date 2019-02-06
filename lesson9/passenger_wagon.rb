@@ -1,5 +1,5 @@
 class PassengerWagon < Wagon
-  OUT_OF_MAX = 'Много мест, не больше 60 шт.'
+  validate :total_volume, :max, 60
 
   def fill_volume(_volume)
     super(1)
@@ -8,12 +8,5 @@ class PassengerWagon < Wagon
   def to_s
     'Пассажирский вагон. Число свободных мест: ' \
       "#{available_volume} шт. (#{@occupied_volume} шт. занятых)"
-  end
-
-  protected
-
-  def validate!
-    super
-    raise OUT_OF_MAX if total_volume > 60
   end
 end

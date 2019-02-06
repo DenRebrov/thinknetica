@@ -7,7 +7,6 @@ class Wagon
 
   NIL_NAME_ERROR = 'Значение не может быть пустым'
 
-  #attr_reader :total_volume, :occupied_volume
   attr_accessor_with_history :total_volume, :occupied_volume
 
   validate :total_volume, :presence

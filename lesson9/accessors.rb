@@ -5,6 +5,7 @@ module Acсessors
       attribute_history_name = "@#{name}_history".to_sym
 
       define_method(name) { instance_variable_get(attribute_name) }
+      define_method("#{name}_history") { instance_variable_get(attribute_history_name) }
 
       define_method("#{name}=".to_sym) do |value|
         old_value = instance_variable_get(attribute_name)
@@ -12,9 +13,9 @@ module Acсessors
 
         attribute_history = instance_variable_get(attribute_history_name)
         if attribute_history.nil?
-          instance_variable_set(attribute_history, [])
+          instance_variable_set(attribute_history_name, [])
         else
-          instance_variable_get(attribute_history) << old_value
+          instance_variable_get(attribute_history_name) << old_value
         end
       end
     end

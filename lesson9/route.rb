@@ -8,7 +8,6 @@ class Route
   STATION_OBJECT_ERROR = 'Начальная или конечная станция не является объектом класса \'Station\''
   SAME_STATIONS_ERROR = 'Начальная и конечная станции одинаковы'
 
-  #attr_reader :stations
   attr_accessor_with_history :stations
 
   def initialize(initial_station, end_station)

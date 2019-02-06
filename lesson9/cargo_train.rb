@@ -1,4 +1,7 @@
 class CargoTrain < Train
+  validate :number, :presence
+  validate :number, :format, VALUE_FORMAT
+
   def attachable_wagon?(wagon)
     wagon.is_a?(CargoWagon)
   end

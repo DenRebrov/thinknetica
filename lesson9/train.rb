@@ -11,7 +11,6 @@ class Train
 
   VALUE_FORMAT = /^[a-zа-яё\d]{3}\-?[a-zа-яё\d]{2}$/i
 
-  #attr_reader :speed, :current_station, :number, :route, :wagons
   attr_accessor_with_history :speed, :current_station, :number, :route, :wagons
 
   validate :number, :presence
